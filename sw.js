@@ -1,5 +1,5 @@
 /* MOU Dashboard service worker: offline support, update in background */
-const CACHE='mou-v20261010a';
+const CACHE='mou-v20261010b';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('mou-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
